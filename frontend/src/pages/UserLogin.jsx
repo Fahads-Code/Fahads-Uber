@@ -18,6 +18,8 @@ const UserLogin = () => {
       email: email,
       password: password
     }
+    navigate('/home');
+
     const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/users/login`, userData);
     if(response.status === 200){
       const data = response.data;
