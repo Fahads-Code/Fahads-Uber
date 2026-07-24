@@ -9,6 +9,8 @@ import UserProtectWrapper from "./pages/UserProtectWrapper";
 import UserLogout from "./pages/UserLogout";
 import CaptianHome from "./pages/CaptianHome";
 import CaptianProtectWrapper from "./pages/CaptianProtectWrapper";
+import Riding from "./pages/Riding";
+import CaptianRiding from "./pages/CaptianRiding";
 
 export const router = createBrowserRouter([
    {
@@ -30,6 +32,14 @@ export const router = createBrowserRouter([
    {
       path: "/captianSignup",
       element: <CaptianSignup />
+   },
+   {
+      path: "/riding",
+      element: <Riding />
+   },
+   {
+      path: "/captianRiding",
+      element: <CaptianRiding />
    },
    {
       path: "/home",

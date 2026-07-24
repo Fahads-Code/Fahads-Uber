@@ -7,6 +7,8 @@ import "remixicon/fonts/remixicon.css";
 import LocationSearchPanal from "../components/LocationSearchPanal";
 import VehiclePanal from "../components/VehiclePanal";
 import ConfirmRide from "../components/ConfirmRide";
+import LookingForDriver from "../components/LookingForDriver";
+import WaitingForDriver from "../components/WaitingForDriver";
 
 const Home = () => {
   const [location, setLocation] = useState("");
@@ -18,6 +20,10 @@ const Home = () => {
   const vehiclePanalRef = useRef(null);
   const [confirmRidePanal, setConfirmRidePanal] = useState(false);
   const confirmRidePanalRef = useRef(null);
+  const [vehicleFound, setVehicleFound] = useState(false);
+  const vehicleFoundRef = useRef(null);
+  const [waitingForDriver, setWaitingForDriver] = useState(false);
+  const WaitingForDriverRef = useRef(null);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -52,6 +58,22 @@ const Home = () => {
       });
     }
   }, [panalOpen]);
+
+  useGSAP(() => {
+    // warm up compositor layers on mount, before any real interaction
+    gsap.set(
+      [
+        vehiclePanalRef.current,
+        confirmRidePanalRef.current,
+        vehicleFoundRef.current,
+        WaitingForDriverRef.current,
+      ],
+      {
+        y: "100%",
+        force3D: true,
+      },
+    );
+  }, []);
 
   useGSAP(() => {
     if (vehiclePanal) {
@@ -89,6 +111,42 @@ const Home = () => {
     }
   }, [confirmRidePanal]);
 
+  useGSAP(() => {
+    if (vehicleFound) {
+      gsap.to(vehicleFoundRef.current, {
+        y: "0%",
+        duration: 0.5,
+        ease: "power2.out",
+        overwrite: "auto",
+      });
+    } else {
+      gsap.to(vehicleFoundRef.current, {
+        y: "100%",
+        duration: 0.5,
+        ease: "power2.out",
+        overwrite: "auto",
+      });
+    }
+  }, [vehicleFound]);
+
+  useGSAP(() => {
+    if (waitingForDriver) {
+      gsap.to(WaitingForDriverRef.current, {
+        y: "0%",
+        duration: 0.5,
+        ease: "power2.out",
+        overwrite: "auto",
+      });
+    } else {
+      gsap.to(WaitingForDriverRef.current, {
+        y: "100%",
+        duration: 0.5,
+        ease: "power2.out",
+        overwrite: "auto",
+      });
+    }
+  }, [waitingForDriver]);
+
   return (
     <>
       <div className="h-screen relative overflow-hidden">
@@ -98,7 +156,7 @@ const Home = () => {
           alt="Uber Logo"
         />
 
-        <div className="h-screen w-screen">
+        <div className="h-[75%] [@media(max-width:380px)]:h-[70%] w-screen">
           <img
             src={uberHomePic}
             alt="Map"
@@ -107,7 +165,7 @@ const Home = () => {
         </div>
 
         <div className="w-full flex flex-col justify-end h-screen absolute bottom-0">
-          <div className="h-[30%] bg-white w-full p-5 relative z-10">
+          <div className="[@media(max-width:380px)]:h-[30%] h-[25%] bg-white w-full p-5 relative z-10">
             <h5
               ref={panalCloseRef}
               onClick={() => setPanalOpen(false)}
@@ -165,7 +223,27 @@ const Home = () => {
           ref={confirmRidePanalRef}
           className="fixed z-10 bg-white bottom-0 px-3 pb-6 pt-3 w-full translate-y-full"
         >
-          <ConfirmRide setConfirmRidePanal={setConfirmRidePanal} />
+          <ConfirmRide
+            setConfirmRidePanal={setConfirmRidePanal}
+            setVehicleFound={setVehicleFound}
+          />
+        </div>
+
+        <div
+          ref={vehicleFoundRef}
+          className="fixed z-20 bg-white bottom-0 px-3 pb-6 pt-3 w-full translate-y-full"
+        >
+          <LookingForDriver
+            setVehicleFound={setVehicleFound}
+            setWaitingForDriver={setWaitingForDriver}
+          />
+        </div>
+
+        <div
+          ref={WaitingForDriverRef}
+          className="fixed z-20 bg-white bottom-0 px-3 pb-6 pt-3 w-full translate-y-full"
+        >
+          <WaitingForDriver setWaitingForDriver={setWaitingForDriver} />
         </div>
       </div>
     </>

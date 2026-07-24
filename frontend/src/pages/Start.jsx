@@ -13,7 +13,6 @@ const Start = ()=> {
         <div className="bg-white py-3 px-5">
            <h2 className="text-2xl font-bold">Get started with Uber</h2>
            <Link className="w-full bg-black text-white py-3 justify-center flex rounded mt-7" to="/login">Continue</Link>
-           <h3 classname></h3>
         </div>
       </div>
     </>

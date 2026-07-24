@@ -1,18 +1,19 @@
-import UberCarIcon from "../assets/uber-icon-removebg-preview.png";
+import UberCarIcon from '../assets/uber-icon-removebg-preview.png'
 
-const ConfirmRide = (props) => { 
+const LookingForDriver = (props) => {
   return (
     <>
       <div>
         <h5
           onClick={() => {
-            props.setConfirmRidePanal(false);
+            props.setVehicleFound(false);
+            props.setWaitingForDriver(true);
           }}
           className="w-full flex justify-center items-center font-bold text-lg text-gray-600"
         >
           <i className="ri-arrow-down-wide-line"></i>
         </h5>
-        <h3 className="text-2xl font-semibold mb-5">Confirm your ride</h3>
+        <h3 className="text-2xl font-semibold mb-5">Looking for a Driver</h3>
 
         <div className="flex justify-between gap-2 flex-col items-center">
           <img src={UberCarIcon} className="w-40" alt="" />
@@ -41,17 +42,10 @@ const ConfirmRide = (props) => {
               </div>
             </div>
           </div>
-
-          <button onClick={()=>{
-            props.setVehicleFound(true);
-            props.setConfirmRidePanal(false);
-          }} className="w-full rounded-lg bg-green-700 p-2 text-white font-semibold">
-            Confirm Ride
-          </button>
         </div>
       </div>
     </>
   );
 };
 
-export default ConfirmRide;
+export default LookingForDriver;

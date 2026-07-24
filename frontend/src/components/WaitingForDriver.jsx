@@ -1,21 +1,30 @@
-import UberCarIcon from "../assets/uber-icon-removebg-preview.png";
+import UberCarIcon from '../assets/uber-icon-removebg-preview.png'
 
-const ConfirmRide = (props) => { 
+const WaitingForDriver = (props) => {
   return (
     <>
       <div>
         <h5
           onClick={() => {
-            props.setConfirmRidePanal(false);
+            // props.setVehicleFound(false); 
+            props.setWaitingForDriver(false);
+            
           }}
           className="w-full flex justify-center items-center font-bold text-lg text-gray-600"
         >
           <i className="ri-arrow-down-wide-line"></i>
         </h5>
-        <h3 className="text-2xl font-semibold mb-5">Confirm your ride</h3>
+
+        <div className='flex items-center justify-between mb-5'>
+          <img className='w-30' src={UberCarIcon} alt="" />
+          <div>
+            <h2 className='text-lg font-medium'>Shoaib</h2>
+            <h4 className='text-xl font-semibold -mt-1 -mb-1'>MP04 B2 1234</h4>
+            <p className='text-sm text-gray-600'>Suzuki Alto</p>
+          </div>
+        </div>
 
         <div className="flex justify-between gap-2 flex-col items-center">
-          <img src={UberCarIcon} className="w-40" alt="" />
           <div className="w-full">
             <div className="flex items-center gap-5 p-3 border-b-2 border-gray-200">
               <i className="text-lg ri-map-pin-2-fill"></i>
@@ -41,17 +50,10 @@ const ConfirmRide = (props) => {
               </div>
             </div>
           </div>
-
-          <button onClick={()=>{
-            props.setVehicleFound(true);
-            props.setConfirmRidePanal(false);
-          }} className="w-full rounded-lg bg-green-700 p-2 text-white font-semibold">
-            Confirm Ride
-          </button>
         </div>
       </div>
     </>
   );
 };
 
-export default ConfirmRide;
+export default WaitingForDriver;
